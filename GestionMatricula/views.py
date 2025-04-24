@@ -43,6 +43,15 @@ def matricular_asignatura(request, asignatura_id):
         messages.info(request, f"Ya estás matriculado en {asignatura.nombre}.")
     return redirect('ver_asignaturas_disponibles')
 
+# visualizar las materias matriculadas.
+
+@login_required
+def asignaturas_matriculadas(request):
+   
+    matriculas = Matricula.objects.select_related('asignatura').filter(estudiante=request.user)
+    return render(request, 'core/asignaturas_matriculadas.html', {'matriculas': matriculas})
+
+
 
 # Docente: Ver Estudiantes Matriculados
 

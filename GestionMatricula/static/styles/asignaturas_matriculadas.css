@@ -1,0 +1,62 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    box-shadow: 0px 0px 10px #ccc;
+    border-radius: 10px;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .asignatura-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background-color: #fafafa;
+  }
+  
+  .asignatura-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0056b3;
+  }
+  
+  .asignatura-details {
+    margin-top: 10px;
+    color: #555;
+  }
+  
+  .no-asignaturas {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+  }
+  
+  .alert {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+  
+  .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .alert-info {
+    background-color: #cce5ff;
+    color: #004085;
+  }
+  
