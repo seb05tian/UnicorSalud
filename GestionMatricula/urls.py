@@ -1,6 +1,9 @@
 from django.urls import path, include
 from rest_framework import routers
-from .views import home, exit, AsignaturaViewSet, asignaturas_admin_view, ver_asignaturas_disponibles,matricular_asignatura,asignaturas_matriculadas
+from .views.matricula import matricular_asignatura,asignaturas_matriculadas
+from .views.asignaturas import AsignaturaViewSet, asignaturas_admin_view, ver_asignaturas_disponibles
+from .views.logout import exit
+from .views.home import home
 
 router = routers.DefaultRouter()
 router.register('asignaturas', AsignaturaViewSet)
@@ -9,9 +12,13 @@ router.register('asignaturas', AsignaturaViewSet)
 urlpatterns = [
     path('', home, name='home'),
     path('logout/', exit, name='exit'),
-    path('gestion_academica/', asignaturas_admin_view, name='gestion_academica'),
-    path('asignaturas_disponibles/', ver_asignaturas_disponibles, name='ver_asignaturas_disponibles'),
+
+    path('gestion_academica/asignaturas', asignaturas_admin_view, name='asignaturas_admin_view'),
+
+    path('matricula/', ver_asignaturas_disponibles, name='ver_asignaturas_disponibles'),
     path('matricular/<int:asignatura_id>/', matricular_asignatura, name='matricular_asignatura'),
-    path('asignaturas_matriculadas/', asignaturas_matriculadas, name='asignaturas_matriculadas'),
+
+    path('asignaturas/', asignaturas_matriculadas, name='asignaturas_matriculadas'),
+
     path('api/', include(router.urls)), 
 ]

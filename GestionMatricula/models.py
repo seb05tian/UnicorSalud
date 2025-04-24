@@ -8,7 +8,9 @@ class usuarios(AbstractUser):
         ('docente', 'Docente'),
         ('admin', 'Administrador'),
     ]
+    identificacion = models.CharField(max_length=20, unique=True)
     rol = models.CharField(max_length=20, choices=ROL_CHOICES)
+    programa = models.ForeignKey('Programa', on_delete=models.CASCADE, null=True, blank=True)
     nivel = models.PositiveIntegerField(null=True, blank=True)
 
     def __str__(self):

@@ -1,12 +1,15 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f8fa;
-    margin: 0;
+
+.asignatura-container {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
   
   h1, h2 {
-    color: #2c3e50;
+    color: #1e1e1e;
+    margin-bottom: 10px;
   }
   
   form {
@@ -16,19 +19,35 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
   
   form input {
-    width: 100%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 14px;
   }
-  
+
+  form input[id="codigo"] {
+    width: 20%;
+  }
+  form input[id="nombre"] {
+    width: 75%;
+  }
+  form input[id="nivel"], input[id="programa"] {
+    width: 45%;
+  }
+  form input[id="descripcion"] {
+    width: 100%;
+  }
+
+
   form button {
-    background-color: #3498db;
+    background-color: #e62133;
     color: white;
     padding: 10px 16px;
     border: none;
@@ -36,6 +55,7 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin: auto;
   }
   
   form button:hover {
@@ -59,24 +79,24 @@ body {
   
   ul li button {
     margin-left: 10px;
-    background-color: #e74c3c;
+    background-color: #3c8fe7;
     color: white;
-    padding: 6px 10px;
+    padding: 8px 12px;
     border: none;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 8px;
     cursor: pointer;
   }
   
   ul li button:hover {
-    background-color: #c0392b;
+    background-color: #2b5dc0;
   }
   
   ul li button:nth-child(2) {
-    background-color: #f39c12;
+    background-color: #e74c3c;
   }
   
   ul li button:nth-child(2):hover {
-    background-color: #d35400;
+    background-color: #af3b2e;
   }
   

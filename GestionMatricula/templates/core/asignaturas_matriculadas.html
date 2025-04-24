@@ -1,4 +1,4 @@
-{% extends 'core/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block title %}Asignaturas Matriculadas{% endblock %}
@@ -9,7 +9,7 @@
 
 {% block content %}
 <div class="container">
-    <h1>Consulta de Asignaturas Matriculadas</h1>
+    <h1>Consulta de Asignaturas</h1>
 
     <form method="get" action="{% url 'asignaturas_matriculadas' %}" class="form-busqueda">
         {% csrf_token %}
@@ -19,7 +19,10 @@
             <input type="text" name="estudiante_id" placeholder="Ej: 3" value="{{ request.GET.estudiante_id }}">
         {% elif is_estudiante %}
             <label for="estudiante_id">Tu ID de Estudiante:</label>
-            <input type="text" name="estudiante_id" value="{{ user.id }}" readonly>
+            <input type="text" name="estudiante_id" value="{{ user.id }}" readonly disabled>
+        {% else %}
+
+
         {% endif %}
 
         {% if is_admin %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Gestión Asignaturas{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'styles/admin_asignatura.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="asignatura-container">
+    <div>
+      <h1>Administrar Asignaturas</h1>
+  
+      <form id="form-asignatura">
+        {% csrf_token %}
+        <input type="hidden" id="id">
+        <input type="text" id="codigo" placeholder="Código" required><br>
+        <input type="text" id="nombre" placeholder="Nombre" required><br>
+        <input type="number" id="nivel" placeholder="Nivel" required><br>
+        <input type="number" id="programa" placeholder="ID Programa" required><br>
+        <input type="text" id="descripcion" placeholder="Descripción"><br>
+        <button type="submit">Guardar</button>
+      </form>
+    </div>
+
+    <div>
+      <h2>Lista de Asignaturas</h2>
+      <ul id="lista-asignaturas"></ul>
+    </div>
+  </div>
+  
+
+  <script src="{% static 'JS/gestionar_asignaturas.js' %}"></script>
+{% endblock %}

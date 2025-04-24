@@ -19,6 +19,9 @@ body {
 }
 
 .sidebar {
+    position: sticky;
+    top: 0;
+    left: 0;
     width: min-content;
     height: 100vh;
     background-color: white;
@@ -57,7 +60,7 @@ body {
 
 .sections {
     display: grid;
-    gap: 20px;
+    gap: 20px;  
 }
 
 .sidebar a {
@@ -72,7 +75,11 @@ body {
     cursor: pointer;
 }
 
-i {
+.sidebar a span{
+    line-height: 1;
+}
+
+.sidebar i {
     font-size: 1rem;
     color: #e62133;
     margin-right: 8px;
@@ -89,6 +96,39 @@ i {
 .logout-container hr {
     margin-block: 12px 8px;
 }
+.submenu {
+    display: none;
+    padding: 0.7rem;
+  }
+
+  .submenu a {
+    display: block;
+    padding: 0.3rem 0;
+    color: #444;
+    text-align: center;
+    line-height: 1.2;
+    text-decoration: none;
+    margin: 0.3rem;    
+  }
+
+  .submenu a:hover {
+    color: #e62133;
+  }
+
+  .active-submenu {
+    position: relative;
+  }
+  .active-submenu .submenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  }
 
 
 @media (max-width: 768px) {
@@ -119,9 +159,7 @@ i {
         font-size: 25px;
     }
 
-    .sidebar a {
-        font-size: 1rem;
-    }
+    
 
     i {
         font-size: 1.2rem;

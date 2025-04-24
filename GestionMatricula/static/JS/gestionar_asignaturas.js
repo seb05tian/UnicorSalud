@@ -28,8 +28,9 @@ function getCookie(name) {
             <li>
               ${asig.codigo} - ${asig.nombre} - Nivel: ${asig.nivel}
               <span>
-                <button onclick="editarAsignatura(${asig.id})">Editar</button>
-                <button onclick="eliminarAsignatura(${asig.id})">Eliminar</button>
+              
+                <button onclick="editarAsignatura(${asig.id})"><i class="fa-regular fa-pen-to-square"></i></button>
+                <button onclick="eliminarAsignatura(${asig.id})"><i class="fa-regular fa-trash-can"></i></button>
               </span>
             </li>
           `;
