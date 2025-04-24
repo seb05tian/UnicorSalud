@@ -5,8 +5,10 @@ from django.contrib import messages
 from .models import usuarios, Asignatura, Matricula, AsignaturaAprobada, Prerrequisito, Reporte
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-
-
+from .serializer import AsignaturaSerializer
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import  permission_classes
+from rest_framework import viewsets
 @login_required
 def home(request):
     return render(request, 'core/home.html')
@@ -46,6 +48,18 @@ def ver_estudiantes_matriculados(request):
         matriculas = Matricula.objects.filter(asignatura=asignatura)
         contexto.append((asignatura, matriculas))
     return render(request, 'estudiantes_matriculados.html', {'asignaturas_matriculas': contexto})
+
+
+
+class AsignaturaViewSet(viewsets.ModelViewSet):
+    queryset = Asignatura.objects.all()
+    serializer_class = AsignaturaSerializer
+    permission_classes = [IsAuthenticated]
+    
+@login_required
+def asignaturas_admin_view(request):
+    return render(request, 'core/gestionar_asignaturas.html')
+
 
 def exit(request):
     logout(request)

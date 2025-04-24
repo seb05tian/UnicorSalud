@@ -8,6 +8,7 @@
         <title>Unicorsalud | {% block title %} {% endblock %}</title>
         {% block styles %} {% endblock %}
         <link rel="stylesheet" href="{% static 'styles/global.css' %}">
+        {% block extra_css %}{% endblock %}
     </head>
     <body>        
         <div class="sidebar">
