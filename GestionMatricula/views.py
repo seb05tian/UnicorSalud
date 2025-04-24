@@ -47,10 +47,32 @@ def matricular_asignatura(request, asignatura_id):
 
 @login_required
 def asignaturas_matriculadas(request):
-   
-    matriculas = Matricula.objects.select_related('asignatura').filter(estudiante=request.user)
-    return render(request, 'core/asignaturas_matriculadas.html', {'matriculas': matriculas})
+    user = request.user
+    is_estudiante = user.rol == 'estudiante'
+    is_admin = user.rol == 'admin'
 
+    estudiante_id = None
+    matriculas = []
+    mostrar_resultados = False
+
+    if is_estudiante:
+        estudiante_id = user.id
+        matriculas = Matricula.objects.filter(estudiante_id=estudiante_id).select_related('asignatura')
+        mostrar_resultados = True
+
+    elif is_admin:
+        estudiante_id = request.GET.get('estudiante_id')
+        if estudiante_id:
+            matriculas = Matricula.objects.filter(estudiante_id=estudiante_id).select_related('asignatura')
+            mostrar_resultados = True
+
+    return render(request, 'core/asignaturas_matriculadas.html', {
+        'matriculas': matriculas,
+        'estudiante_id': estudiante_id,
+        'is_estudiante': is_estudiante,
+        'is_admin': is_admin,
+        'mostrar_resultados': mostrar_resultados
+    })
 
 
 # Docente: Ver Estudiantes Matriculados

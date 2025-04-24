@@ -9,6 +9,7 @@ class usuarios(AbstractUser):
         ('admin', 'Administrador'),
     ]
     rol = models.CharField(max_length=20, choices=ROL_CHOICES)
+    nivel = models.PositiveIntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.get_full_name()
