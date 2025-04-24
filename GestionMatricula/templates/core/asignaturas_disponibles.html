@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Asignaturas Disponibles{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/asignaturas_disponible.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Asignaturas Disponibles</h1>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  {% if asignaturas %}
+    {% for asignatura in asignaturas %}
+      <div class="asignatura-card">
+        <div class="asignatura-title">{{ asignatura.codigo }} - {{ asignatura.nombre }}</div>
+        <div class="asignatura-details">
+          <strong>Nivel:</strong> {{ asignatura.nivel }}<br>
+          <strong>Descripción:</strong> {{ asignatura.descripcion|default:"Sin descripción" }}
+        </div>
+        <form action="{% url 'matricular_asignatura' asignatura.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="matricular-btn">Matricularse</button>
+        </form>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="no-asignaturas">No hay asignaturas disponibles por el momento.</div>
+  {% endif %}
+</div>
+{% endblock %}

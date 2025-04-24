@@ -1,0 +1,66 @@
+body {
+    font-family: "Segoe UI", sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #2c3e50;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .asignatura-card {
+    background: #ffffff;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+  }
+
+  .asignatura-card:hover {
+    transform: scale(1.02);
+  }
+
+  .asignatura-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #2980b9;
+  }
+
+  .asignatura-details {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .matricular-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+  }
+
+  .matricular-btn:hover {
+    background-color: #2980b9;
+  }
+
+  .no-asignaturas {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 16px;
+    color: #999;
+  }

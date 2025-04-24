@@ -16,15 +16,20 @@ def home(request):
 
 # Estudiante: Ver Asignaturas y Matricular
 # Ver Asignaturas disponibles
+@login_required
 def ver_asignaturas_disponibles(request):
     aprobadas = AsignaturaAprobada.objects.filter(estudiante=request.user).values_list('asignatura_id', flat=True)
-    asignaturas = Asignatura.objects.exclude(id__in=aprobadas)
+    ya_matriculadas = Matricula.objects.filter(estudiante=request.user).values_list('asignatura_id', flat=True)
+    asignaturas = Asignatura.objects.exclude(id__in=aprobadas).exclude(id__in=ya_matriculadas)
+
     asignaturas_finales = []
     for asignatura in asignaturas:
         prereqs = Prerrequisito.objects.filter(asignatura=asignatura)
         if all(p.prerequisito.id in aprobadas for p in prereqs):
             asignaturas_finales.append(asignatura)
-    return render(request, 'asignaturas_disponibles.html', {'asignaturas': asignaturas_finales})
+
+    return render(request, 'core/asignaturas_disponibles.html', {'asignaturas': asignaturas_finales})
+
 
 # Proceso para matricularse los estudiantes
 
@@ -36,7 +41,7 @@ def matricular_asignatura(request, asignatura_id):
         messages.success(request, f"Te has matriculado en {asignatura.nombre}.")
     else:
         messages.info(request, f"Ya estás matriculado en {asignatura.nombre}.")
-    return redirect('ver_asignaturas.html')
+    return redirect('ver_asignaturas_disponibles')
 
 
 # Docente: Ver Estudiantes Matriculados
@@ -58,7 +63,7 @@ class AsignaturaViewSet(viewsets.ModelViewSet):
     
 @login_required
 def asignaturas_admin_view(request):
-    return render(request, 'core/gestionar_asignaturas.html')
+    return render(request, 'core/gestion_academica.html')
 
 
 def exit(request):
