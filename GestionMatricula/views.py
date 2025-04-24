@@ -4,6 +4,12 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from .models import usuarios, Asignatura, Matricula, AsignaturaAprobada, Prerrequisito, Reporte
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+
+
+@login_required
+def home(request):
+    return render(request, 'core/home.html')
 
 
 # Estudiante: Ver Asignaturas y Matricular
@@ -41,4 +47,6 @@ def ver_estudiantes_matriculados(request):
         contexto.append((asignatura, matriculas))
     return render(request, 'estudiantes_matriculados.html', {'asignaturas_matriculas': contexto})
 
-
+def exit(request):
+    logout(request)
+    return redirect('login')

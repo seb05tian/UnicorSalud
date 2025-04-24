@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Unicorsalud | {% block title %} {% endblock %}</title>
+        {% block styles %} {% endblock %}
+        <link rel="stylesheet" href="{% static 'styles/global.css' %}">
+    </head>
+    <body>        
+        <div class="sidebar">
+            <div class="avatar-container">
+                <div class="avatar">
+                    {{ user.username|slice:":1"|upper }}
+                </div>
+                <h5>
+                    {{ user.first_name }} {{ user.last_name }}
+                </h5>
+            </div>
+
+            <div class="sections">
+                <a >
+                    <i class="fa-solid fa-house"></i>
+                    <span>Inicio</span>
+                </a>
+                <a>
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <span>Matricular</span>
+                </a>
+                <a >
+                    <i class="fa-solid fa-book"></i>
+                    <span>Asignaturas</span>
+                </a>
+                <a href="" >
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span>Reportes</span>
+                </a>
+            </div>
+
+            <div class="logout-container">
+
+                <a class="logout" href={% url 'exit' %}>
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Salir</span>
+                </a>
+                <hr>
+                <img class="landing" src="../../static/img/fondoLogin.webp">
+
+            </div>
+
+        </div>
+        
+        <div class="no-mobile">
+            No disponible en dispositivos móviles
+        </div>
+
+
+        {% block content %}
+
+        {% endblock %}
+        
+    </body>
+    <script src="https://kit.fontawesome.com/b5433eee80.js" crossorigin="anonymous"></script>
+    
+</html>

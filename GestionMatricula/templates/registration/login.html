@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Unicorsalud | Login</title>
+        <link rel="stylesheet" href="{% static 'styles/login.css' %}"> 
+    </head>
+    <body>
+        <main class="login-body">
+            <div class="image-container w-md">
+                <img class="landing" src="../../static/img/image.jpg">
+            </div>
+            <div class="form-container w-md">
+                <img class="landing" src="../../static/img/fondoLogin.webp">
+    
+                <h3>Inicio de Sesión</h3>
+                
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="Usuario" required>
+                    <input type="password" name="password" placeholder="Contraseña" required>
+                    <button>Ingresar</button>
+                </form>
+            </div>
+    
+        </main>
+    </body>    
+</html>
+
