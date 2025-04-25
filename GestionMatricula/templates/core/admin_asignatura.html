@@ -10,26 +10,28 @@
 {% block content %}
   <div class="asignatura-container">
     <div>
-      <h1>Administrar Asignaturas</h1>
+      <h1>{% if form.instance.pk %}Editar Asignatura{% else %}Crear Asignatura{% endif %}</h1>
   
-      <form id="form-asignatura">
+      <form method="post">
         {% csrf_token %}
-        <input type="hidden" id="id">
-        <input type="text" id="codigo" placeholder="Código" required><br>
-        <input type="text" id="nombre" placeholder="Nombre" required><br>
-        <input type="number" id="nivel" placeholder="Nivel" required><br>
-        <input type="number" id="programa" placeholder="ID Programa" required><br>
-        <input type="text" id="descripcion" placeholder="Descripción"><br>
+        {{ form.as_p }}
         <button type="submit">Guardar</button>
       </form>
     </div>
 
     <div>
       <h2>Lista de Asignaturas</h2>
-      <ul id="lista-asignaturas"></ul>
+      <ul>
+        {% for asig in asignaturas %}
+          <li>
+            <span>{{ asig.codigo }} - {{ asig.nombre }} - Nivel: {{ asig.nivel }}</span>
+            <div class="action-buttons">
+              <a class="edit" href="{% url 'editar_asignatura_admin' asig.pk %}">Editar</a>
+              <a class="delete" href="{% url 'eliminar_asignatura_admin' asig.pk %}">Eliminar</a>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
     </div>
   </div>
-  
-
-  <script src="{% static 'JS/gestionar_asignaturas.js' %}"></script>
 {% endblock %}

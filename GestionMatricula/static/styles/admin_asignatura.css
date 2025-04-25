@@ -1,102 +1,133 @@
+/* admin_asignatura.css */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 0;
+}
 
 .asignatura-container {
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+h1, h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+form input[type="text"],
+form select {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  background-color: #fafafa;
+  transition: border-color 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form select:focus {
+  border-color: #c0392b;
+  outline: none;
+}
+
+button[type="submit"] {
+  background-color: #c0392b;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #a93226;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding: 14px 10px;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+}
+
+li span {
+  flex: 1;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.action-buttons a {
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.3s, color 0.3s;
+}
+
+.action-buttons a.edit {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.action-buttons a.edit:hover {
+  background-color: #c0392b;
+}
+
+.action-buttons a.delete {
+  background-color: transparent;
+  color: #c0392b;
+  border: 2px solid #c0392b;
+}
+
+.action-buttons a.delete:hover {
+  background-color: #c0392b;
+  color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .asignatura-container {
+    grid-template-columns: 1fr;
     padding: 20px;
-    display: flex;
+  }
+
+  li {
     flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-  
-  h1, h2 {
-    color: #1e1e1e;
-    margin-bottom: 10px;
-  }
-  
-  form {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    margin-bottom: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  form input {
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
+    align-items: flex-start;
+    gap: 10px;
   }
 
-  form input[id="codigo"] {
-    width: 20%;
+  .action-buttons {
+    flex-direction: row;
   }
-  form input[id="nombre"] {
-    width: 75%;
-  }
-  form input[id="nivel"], input[id="programa"] {
-    width: 45%;
-  }
-  form input[id="descripcion"] {
-    width: 100%;
-  }
-
-
-  form button {
-    background-color: #e62133;
-    color: white;
-    padding: 10px 16px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: auto;
-  }
-  
-  form button:hover {
-    background-color: #2980b9;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  ul li {
-    background-color: #ecf0f1;
-    margin-bottom: 10px;
-    padding: 12px 16px;
-    border-radius: 6px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  ul li button {
-    margin-left: 10px;
-    background-color: #3c8fe7;
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    font-size: 8px;
-    cursor: pointer;
-  }
-  
-  ul li button:hover {
-    background-color: #2b5dc0;
-  }
-  
-  ul li button:nth-child(2) {
-    background-color: #e74c3c;
-  }
-  
-  ul li button:nth-child(2):hover {
-    background-color: #af3b2e;
-  }
-  
+}
