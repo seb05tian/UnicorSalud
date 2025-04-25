@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Gestión Usuario{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'styles/admin_usuarios.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="usuario-container">
+    <div>
+      <h1>Administrar Usuarios</h1>
+  
+        <form method="post" id="form-usuario" action="{% url 'usuarios_admin_view' %}">
+            {% csrf_token %}
+            <input type="text" name="identificacion" placeholder="Identificación" required><br>
+            <input type="email" name="email" placeholder="Correo" required><br>
+            <input type="text" name="username" placeholder="Usuario" required><br>
+            <input type="text" name="first_name" placeholder="Nombre" required><br>
+            <input type="text" name="last_name" placeholder="Apellido" required><br>
+        
+            <select name="rol" required>
+                <option selected disabled value="">Seleccione un rol</option>
+                <option value="estudiante">Estudiante</option>
+                <option value="docente">Docente</option>
+                <option value="admin">Administrador</option>
+            </select><br>
+        
+            <button type="submit">Guardar</button>
+        </form>
+        
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li >
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    </div>
+
+    <div>
+      <h2>Lista de Usuarios</h2>
+      <ul id="lista-usuarios">
+        {% for usuario in usuarios %}
+          <li class="usuario-item">
+            <span>{{ usuario.username }} - {{ usuario.rol }}</span>            
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}

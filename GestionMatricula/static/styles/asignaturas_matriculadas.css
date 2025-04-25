@@ -29,7 +29,7 @@ input[type="text"] {
 }
 
 button {
-    background-color: #007bff;
+    background-color: #e62133;
     border: none;
     color: white;
     padding: 10px 20px;
@@ -40,12 +40,12 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #c11b29;
 }
 
 .asignatura-card {
     background-color: #f8f9fa;
-    border-left: 6px solid #007bff;
+    border-left: 6px solid #e62133;
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 8px;

@@ -45,10 +45,10 @@
                         <span>Gestión Académica</span>
                     </a>
                     <div class="submenu">
-                        <a href="/programas">Programas</a>
+                        <a href="{% url 'programa_admin_view' %}">Programas</a>
                         <a href="{% url 'asignaturas_admin_view' %}">Asignaturas</a>
                         <a href="/asignacion-docentes">Asignación Docentes</a>
-                        <a href="/usuarios">Usuarios</a>
+                        <a href="{% url 'usuarios_admin_view' %}">Usuarios</a>
                     </div>
                 </div>
                 <a href="" >
