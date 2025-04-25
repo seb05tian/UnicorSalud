@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Asignación Docentes{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'styles/admin_docente_asign.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Asignar asignaturas a docentes</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" action="{% url 'asignar_asignatura_admin_view' %}">
+            {% csrf_token %}
+
+            <label for="docente">Docente:</label>
+            <select name="docente_id" id="docente" required>
+                <option value="">Seleccione un docente</option>
+                {% for docente in docentes %}
+                    <option value="{{ docente.id }}">{{ docente.get_full_name }}</option>
+                {% endfor %}
+            </select><br>
+
+            <label for="asignatura">Asignatura:</label>
+            <select name="asignatura_id" id="asignatura" required>
+                <option value="">Seleccione una asignatura</option>
+                {% for asignatura in asignaturas %}
+                    <option value="{{ asignatura.id }}">{{ asignatura.nombre }}</option>
+                {% endfor %}
+            </select><br>
+
+            <button type="submit">Asignar</button>
+        </form>
+    </div>
+{% endblock %}

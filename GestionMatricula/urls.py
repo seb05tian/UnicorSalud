@@ -7,7 +7,7 @@ from .views.logout import exit
 from .views.home import home
 from .views.usuarios import usuarios_admin_view
 from .views.programa import programas_view,  eliminar_programa
-from .views.docente import docente_asignaturas_asignadas, listado_estudiantes
+from .views.docente import docente_asignaturas_asignadas
 
 urlpatterns = [
     path('', home, name='home'),
@@ -18,7 +18,8 @@ urlpatterns = [
 
     path('gestion_academica/asignaturas', asignaturas_admin_view, name='asignaturas_admin_view'),
     path('gestion_academica/usuarios', usuarios_admin_view, name='usuarios_admin_view'),
-    path('gestion_academica/programa/', programas_view, name='programa_admin_view'),
+    path('gestion_academica/programa/', programas_view, name='programa_admin_view'),    
+    path('gestion_academica/asignar-asignatura/', asignar_asignatura, name='asignar_asignatura_admin_view'),
 
     path('gestion_admin/asignaturas/', asignaturas_admin_view, name='asignaturas_admin'),
     path('gestion_admin/asignaturas/editar/<int:pk>/', editar_asignatura, name='editar_asignatura_admin'),
