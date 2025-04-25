@@ -30,14 +30,14 @@ def asignaturas_matriculadas(request):
     mostrar_resultados = False
 
     if is_estudiante:
-        estudiante_id = user.id
-        matriculas = Matricula.objects.filter(estudiante_id=estudiante_id).select_related('asignatura')
+        estudiante_id = user.identificacion
+        matriculas = Matricula.objects.filter(estudiante__identificacion=estudiante_id).select_related('asignatura')
         mostrar_resultados = True
 
     elif is_admin:
         estudiante_id = request.GET.get('estudiante_id')
         if estudiante_id:
-            matriculas = Matricula.objects.filter(estudiante_id=estudiante_id).select_related('asignatura')
+            matriculas = Matricula.objects.filter(estudiante__identificacion=estudiante_id).select_related('asignatura')
             mostrar_resultados = True
 
     return render(request, 'core/asignaturas_matriculadas.html', {
@@ -47,7 +47,6 @@ def asignaturas_matriculadas(request):
         'is_admin': is_admin,
         'mostrar_resultados': mostrar_resultados
     })
-
 
 # Docente: Ver Estudiantes Matriculados
 

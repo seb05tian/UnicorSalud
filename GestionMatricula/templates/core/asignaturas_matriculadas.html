@@ -19,7 +19,7 @@
             <input type="text" name="estudiante_id" placeholder="Ej: 3" value="{{ request.GET.estudiante_id }}">
         {% elif is_estudiante %}
             <label for="estudiante_id">Tu ID de Estudiante:</label>
-            <input type="text" name="estudiante_id" value="{{ user.id }}" readonly disabled>
+            <input type="text" name="estudiante_id" value="{{ user.identificacion }}" readonly disabled>
         {% else %}
 
 
