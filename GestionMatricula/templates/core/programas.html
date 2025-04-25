@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Asignaturas Disponibles{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/programas.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Gestión de Programas</h1>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="POST" class="formulario">
+        {% csrf_token %}
+        <input type="text" name="nombre" placeholder="Nuevo programa" required>
+        <button type="submit">Agregar</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for programa in programas %}
+                <tr>
+                    <td>{{ programa.nombre }}</td>
+                    <td>
+                        <form method="POST" action="{% url 'eliminar_programa' programa.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="eliminar">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
