@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Estudiantes Inscritos{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/listado_estudiantes.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Estudiantes Inscritos en {{ asignatura.nombre }}</h1>
+
+    {% if estudiantes %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Identificación</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Nivel</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for matricula in estudiantes %}
+                <tr>
+                    <td>{{ matricula.estudiante.identificacion }}</td>
+                    <td>{{ matricula.estudiante.first_name }}</td>
+                    <td>{{ matricula.estudiante.first_name }}</td>
+                    <td>{{ asignatura.nivel }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="no-data">No hay estudiantes inscritos en esta asignatura.</p>
+    {% endif %}
+</div>
+{% endblock %}

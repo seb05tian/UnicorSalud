@@ -36,15 +36,19 @@
         {% if Asignaciones %}
             <h2>Asignaturas Asignadas</h2>
             {% for Asignaciones in Asignaciones %}
-                <div class="asignatura-card">
-                    <div class="asignatura-title">
-                        {{ Asignaciones.asignatura.codigo }} - {{ Asignaciones.asignatura.nombre }}
-                    </div>
-                    <div class="asignatura-details">
-                        <p><strong>Nivel:</strong> {{ Asignaciones.asignatura.nivel }}</p>
-                        <p><strong>Descripción:</strong> {{ Asignaciones.asignatura.descripcion|default:"Sin descripción" }}</p>
-                    </div>
+            <div class="asignatura-card">
+                <div class="asignatura-title">
+                    {{ Asignaciones.asignatura.codigo }} - {{ Asignaciones.asignatura.nombre }}
                 </div>
+                <div class="asignatura-details">
+                    <p><strong>Nivel:</strong> {{ Asignaciones.asignatura.nivel }}</p>
+                    <p><strong>Descripción:</strong> {{ Asignaciones.asignatura.descripcion|default:"Sin descripción" }}</p>
+            
+                    
+                    <a href="{% url 'listado_estudiantes' Asignaciones.asignatura.id %}" class="btn-inscritos">Inscritos</a>
+
+                </div>
+            </div>
             {% endfor %}
         {% else %}
             <p class="no-asignaturas">No se encontraron asignaturas matriculadas para este ID.</p>

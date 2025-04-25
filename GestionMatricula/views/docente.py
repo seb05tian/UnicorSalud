@@ -32,3 +32,16 @@ def docente_asignaturas_asignadas(request):
         'is_admin': is_admin,
         'mostrar_resultados': mostrar_resultados
     })
+
+  
+
+@login_required
+def listado_estudiantes(request, asignatura_id):
+    asignatura = get_object_or_404(Asignatura, id=asignatura_id)
+    estudiantes = Matricula.objects.filter(asignatura_id=asignatura_id).select_related('estudiante')
+
+    context = {
+        'asignatura': asignatura,
+        'estudiantes': estudiantes,
+    }
+    return render(request, 'core/listado_estudiantes.html', context)

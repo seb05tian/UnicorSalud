@@ -81,14 +81,21 @@ button:hover {
     color: #555;
 }
 
-
-.no-asignaturas {
-    text-align: center;
-    font-style: italic;
-    color: #888;
-    margin-top: 20px;
+.btn-inscritos {
+    display: inline-block;
+    padding: 10px 18px;
+    background-color: #e62133; 
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+.btn-inscritos:hover {
+    background-color: #b3001f; 
+}
 
 @media (max-width: 600px) {
     .form-busqueda {
