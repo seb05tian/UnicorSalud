@@ -1,9 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from ..models import usuarios, Asignatura, Matricula, AsignaturaAprobada, Prerrequisito, Reporte
-from ..serializer import AsignaturaSerializer
-from rest_framework.permissions import IsAuthenticated
-from rest_framework import viewsets
+from ..forms import AsignaturaForm
 
 # Estudiante: Ver Asignaturas y Matricular
 # Ver Asignaturas disponibles
@@ -21,11 +19,42 @@ def ver_asignaturas_disponibles(request):
 
     return render(request, 'core/asignaturas_disponibles.html', {'asignaturas': asignaturas_finales})
 
-class AsignaturaViewSet(viewsets.ModelViewSet):
-    queryset = Asignatura.objects.all()
-    serializer_class = AsignaturaSerializer
-    permission_classes = [IsAuthenticated]
-    
 @login_required
 def asignaturas_admin_view(request):
-    return render(request, 'core/admin_asignatura.html')
+    asignaturas = Asignatura.objects.all()
+    form = AsignaturaForm()
+
+    if request.method == 'POST':
+        form = AsignaturaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('asignaturas_admin')
+
+    return render(request, 'core/admin_asignatura.html', {
+        'asignaturas': asignaturas,
+        'form': form,
+    })
+
+@login_required
+def editar_asignatura(request, pk):
+    asignatura = get_object_or_404(Asignatura, pk=pk)
+    if request.method == 'POST':
+        form = AsignaturaForm(request.POST, instance=asignatura)
+        if form.is_valid():
+            form.save()
+            return redirect('asignaturas_admin')
+    else:
+        form = AsignaturaForm(instance=asignatura)
+
+    asignaturas = Asignatura.objects.all()
+    return render(request, 'core/admin_asignatura.html', {
+        'form': form,
+        'asignaturas': asignaturas
+    })
+
+
+@login_required
+def eliminar_asignatura(request, pk):
+    asignatura = get_object_or_404(Asignatura, pk=pk)
+    asignatura.delete()
+    return redirect('asignaturas_admin')
