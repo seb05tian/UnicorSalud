@@ -26,8 +26,8 @@
           <li>
             <span>{{ asig.codigo }} - {{ asig.nombre }} - Nivel: {{ asig.nivel }}</span>
             <div class="action-buttons">
-              <a class="edit" href="{% url 'editar_asignatura_admin' asig.pk %}">Editar</a>
-              <a class="delete" href="{% url 'eliminar_asignatura_admin' asig.pk %}">Eliminar</a>
+              <a class="edit" href="{% url 'editar_asignatura_admin' asig.pk %}"><i class="fa-regular fa-pen-to-square"></i></a>
+              <a class="delete" href="{% url 'eliminar_asignatura_admin' asig.pk %}"><i class="fa-regular fa-trash-can"></i></a>
             </div>
           </li>
         {% endfor %}
