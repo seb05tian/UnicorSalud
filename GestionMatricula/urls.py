@@ -21,7 +21,7 @@ urlpatterns = [
 
     path('asignaturas/', asignaturas_matriculadas, name='asignaturas_matriculadas'),
 
-    path('crear_programa/', programas_view, name='crear_programa'),
+    path('gestion_academica/programa/', programas_view, name='programa_admin_view'),
  
     path('eliminar_programa/<int:programa_id>/', eliminar_programa, name='eliminar_programa'),
 

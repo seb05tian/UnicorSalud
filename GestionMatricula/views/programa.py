@@ -15,7 +15,7 @@ def programas_view(request):
             except:
                 messages.error(request, 'Ya existe un programa con ese nombre.')
 
-        return redirect('crear_programa')
+        return redirect('programa_admin_view')
 
     return render(request, 'core/programas.html', {'programas': programas})
 
@@ -24,4 +24,4 @@ def eliminar_programa(request, programa_id):
     programa = get_object_or_404(Programa, id=programa_id)
     programa.delete()
     messages.success(request, 'Programa eliminado correctamente.')
-    return redirect('crear_programa')
+    return redirect('programa_admin_view')

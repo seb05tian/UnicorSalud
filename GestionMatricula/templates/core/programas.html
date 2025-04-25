@@ -28,6 +28,7 @@
     <table>
         <thead>
             <tr>
+                <th>Código</th>
                 <th>Nombre</th>
                 <th>Acciones</th>
             </tr>
@@ -35,6 +36,7 @@
         <tbody>
             {% for programa in programas %}
                 <tr>
+                    <td>{{ programa.id }}</td>
                     <td>{{ programa.nombre }}</td>
                     <td>
                         <form method="POST" action="{% url 'eliminar_programa' programa.id %}">
