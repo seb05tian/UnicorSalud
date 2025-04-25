@@ -7,14 +7,16 @@ from .views.logout import exit
 from .views.home import home
 from .views.usuarios import usuarios_admin_view
 from .views.programa import programas_view,  eliminar_programa
-
+from .views.docente import docente_asignaturas_asignadas
 
 urlpatterns = [
     path('', home, name='home'),
     path('logout/', exit, name='exit'),
 
+    path('gestion_docente/asignaturas', docente_asignaturas_asignadas, name='asignaturas_docente'),
+    
     path('gestion_academica/asignaturas', asignaturas_admin_view, name='asignaturas_admin_view'),
-     path('gestion_academica/usuarios', usuarios_admin_view, name='usuarios_admin_view'),
+    path('gestion_academica/usuarios', usuarios_admin_view, name='usuarios_admin_view'),
     path('gestion_academica/programa/', programas_view, name='programa_admin_view'),
 
     path('gestion_admin/asignaturas/', asignaturas_admin_view, name='asignaturas_admin'),

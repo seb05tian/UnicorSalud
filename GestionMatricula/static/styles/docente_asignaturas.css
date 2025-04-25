@@ -1,0 +1,101 @@
+
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 35px;
+    font-size: 28px;
+}
+
+
+.form-busqueda {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.form-busqueda label {
+    font-weight: bold;
+    color: #444;
+}
+
+.form-busqueda input[type="text"] {
+    padding: 10px;
+    width: 260px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+
+button {
+    background-color: #e62133;
+    border: none;
+    color: white;
+    padding: 10px 22px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #c11b29;
+}
+
+
+.asignatura-card {
+    background-color: #f8f9fa;
+    border-left: 6px solid #e62133;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.asignatura-card:hover {
+    background-color: #e9ecef;
+}
+
+.asignatura-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.asignatura-details p {
+    margin: 4px 0;
+    color: #555;
+}
+
+
+.no-asignaturas {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+    margin-top: 20px;
+}
+
+
+@media (max-width: 600px) {
+    .form-busqueda {
+        flex-direction: column;
+    }
+
+    .form-busqueda input[type="text"] {
+        width: 100%;
+    }
+}
