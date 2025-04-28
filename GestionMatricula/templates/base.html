@@ -26,35 +26,48 @@
                     <i class="far fa-chart-bar"></i>
                     <span>Dashboard</span>
                 </a>
+                
                 <a href="{% url 'asignaturas_matriculadas' %}">
                     <i class="far fa-folder-open"></i>
                     <span>Asignaturas</span>
                 </a>
-                <a href="{% url 'ver_asignaturas_disponibles' %}">
-                    <i class="fa-regular fa-clipboard"></i>
-                    <span>Matriculas</span>
-                </a>
-                <a>
-                    <i class="far fa-calendar-check"></i>
-                    <span>Historial Académico</span>
-                </a>
-                
-                <div id="gestion-academica" onclick="toggleSubMenu(this)" style="cursor: pointer;">
-                    <a>
-                        <i class="fa-regular fa-building"></i>
-                        <span>Gestión Académica</span>
+
+                {% if user.rol == 'estudiante' %}
+
+                    <a href="{% url 'ver_asignaturas_disponibles' %}">
+                        <i class="fa-regular fa-clipboard"></i>
+                        <span>Matriculas</span>
                     </a>
-                    <div class="submenu">
-                        <a href="{% url 'programa_admin_view' %}">Programas</a>
-                        <a href="{% url 'asignaturas_admin_view' %}">Asignaturas</a>
-                        <a href="{% url 'asignar_asignatura_admin_view' %}">Asignación Docentes</a>
-                        <a href="{% url 'usuarios_admin_view' %}">Usuarios</a>
+                    <a>
+                        <i class="far fa-calendar-check"></i>
+                        <span>Historial Académico</span>
+                    </a>
+
+                {% elif user.rol == 'admin' %}
+                    <div id="gestion-academica" onclick="toggleSubMenu(this)" style="cursor: pointer;">
+                        <a>
+                            <i class="fa-regular fa-building"></i>
+                            <span>Gestión Académica</span>
+                        </a>
+                        <div class="submenu">
+                            <a href="{% url 'programa_admin_view' %}">Programas</a>
+                            <a href="{% url 'asignaturas_admin_view' %}">Asignaturas</a>
+                            <a href="{% url 'asignar_asignatura_admin_view' %}">Asignación Docentes</a>
+                            <a href="{% url 'usuarios_admin_view' %}">Usuarios</a>
+                        </div>
                     </div>
-                </div>
-                <a href="" >
-                    <i class="far fa-file-alt"></i>
-                    <span>Reportes</span>
-                </a>
+                    <a href="" >
+                        <i class="far fa-file-alt"></i>
+                        <span>Reportes</span>
+                    </a>
+
+                {% elif user.rol == 'docente' %}
+                    <a href="" >
+                        <i class="far fa-file-alt"></i>
+                        <span>Reportes</span>
+                    </a>
+                {% endif %}                
+                
             </div>
 
             <div class="logout-container">
