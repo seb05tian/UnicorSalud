@@ -2,9 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from ..models import Asignatura, AsignaturaDocente
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from ..decorator import role_required
 
 User = get_user_model()
 
+@login_required
+@role_required(allowed_roles=['admin'])
 def asignar_asignatura(request):
     if request.method == 'POST':
         docente_id = request.POST.get('docente_id')

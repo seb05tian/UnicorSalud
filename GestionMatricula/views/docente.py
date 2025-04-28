@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from ..models import Asignatura, Matricula, AsignaturaDocente
+from ..decorator import role_required
 
 
 @login_required
+@role_required(allowed_roles=['docente'])
 def docente_asignaturas_asignadas(request):
     user = request.user
     is_docente = user.rol == 'docente'
@@ -36,6 +38,7 @@ def docente_asignaturas_asignadas(request):
   
 
 @login_required
+@role_required(allowed_roles=['docente'])
 def listado_estudiantes(request, asignatura_id):
     asignatura = get_object_or_404(Asignatura, id=asignatura_id)
     estudiantes = Matricula.objects.filter(asignatura_id=asignatura_id).select_related('estudiante')

@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from ..models import Matricula
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from ..decorator import role_required
 
 def exportar_reporte_excel(request):
     if not request.user.is_authenticated or request.user.rol != 'admin':
@@ -56,6 +57,7 @@ def exportar_reporte_excel(request):
 
 
 @login_required
+@role_required(allowed_roles=['admin'])
 def pagina_reporte_admin(request):
     if not request.user.is_authenticated or request.user.rol != 'admin':
         return HttpResponse("No autorizado", status=403)

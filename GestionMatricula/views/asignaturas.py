@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from ..models import usuarios, Asignatura, Matricula, AsignaturaAprobada, Prerrequisito, Reporte
 from ..forms import AsignaturaForm
+from ..decorator import role_required
 
 # Estudiante: Ver Asignaturas y Matricular
 # Ver Asignaturas disponibles
 @login_required
+@role_required(allowed_roles=['estudiante'])
 def ver_asignaturas_disponibles(request):
     aprobadas = AsignaturaAprobada.objects.filter(estudiante=request.user).values_list('asignatura_id', flat=True)
     ya_matriculadas = Matricula.objects.filter(estudiante=request.user).values_list('asignatura_id', flat=True)
@@ -20,6 +22,7 @@ def ver_asignaturas_disponibles(request):
     return render(request, 'core/asignaturas_disponibles.html', {'asignaturas': asignaturas_finales})
 
 @login_required
+@role_required(allowed_roles=['admin'])
 def asignaturas_admin_view(request):
     asignaturas = Asignatura.objects.all()
     form = AsignaturaForm()
@@ -41,6 +44,7 @@ def asignaturas_admin_view(request):
     })
 
 @login_required
+@role_required(allowed_roles=['admin'])
 def editar_asignatura(request, pk):
     asignatura = get_object_or_404(Asignatura, pk=pk)
 
@@ -81,6 +85,7 @@ def editar_asignatura(request, pk):
 
 
 @login_required
+@role_required(allowed_roles=['admin'])
 def eliminar_asignatura(request, pk):
     asignatura = get_object_or_404(Asignatura, pk=pk)
     asignatura.delete()

@@ -6,6 +6,7 @@ from io import BytesIO
 from ..models import Matricula, AsignaturaDocente
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from ..decorator import role_required
 
 
 @login_required
@@ -62,6 +63,7 @@ def exportar_estudiantes_por_asignatura_docente(request):
     return response
 
 @login_required
+@role_required(allowed_roles=['docente'])
 def pagina_reporte_docente(request):
     if not request.user.is_authenticated or request.user.rol != 'docente':
         return HttpResponse("No autorizado", status=403)

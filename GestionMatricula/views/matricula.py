@@ -2,11 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from ..models import Asignatura, Matricula
-
-
+from ..decorator import role_required
 
 # Proceso para matricularse los estudiantes
-
+@role_required(allowed_roles=['estudiante', 'admin'])
 def matricular_asignatura(request, asignatura_id):
     asignatura = get_object_or_404(Asignatura, id=asignatura_id)
     ya_matriculado = Matricula.objects.filter(estudiante=request.user, asignatura=asignatura).exists()
@@ -18,8 +17,8 @@ def matricular_asignatura(request, asignatura_id):
     return redirect('ver_asignaturas_disponibles')
 
 # visualizar las materias matriculadas.
-
 @login_required
+@role_required(allowed_roles=['estudiante', 'admin', 'docente'])
 def asignaturas_matriculadas(request):
     user = request.user
     is_estudiante = user.rol == 'estudiante'
@@ -49,7 +48,8 @@ def asignaturas_matriculadas(request):
     })
 
 # Docente: Ver Estudiantes Matriculados
-
+@login_required
+@role_required(allowed_roles=['docente', 'admin'])
 def ver_estudiantes_matriculados(request):
     asignaturas = request.user.asignatura_set.all()
     contexto = []

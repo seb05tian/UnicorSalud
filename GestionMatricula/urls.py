@@ -4,7 +4,7 @@ from rest_framework import routers
 from .views.matricula import matricular_asignatura,asignaturas_matriculadas
 from .views.asignaturas import  asignaturas_admin_view, ver_asignaturas_disponibles, editar_asignatura, eliminar_asignatura
 from .views.logout import exit
-from .views.home import home
+from .views.home import home, no_autorizado
 from .views.usuarios import usuarios_admin_view
 from .views.programa import programas_view,  eliminar_programa
 from .views.docente import docente_asignaturas_asignadas, listado_estudiantes
@@ -42,5 +42,5 @@ urlpatterns = [
     path('eliminar_programa/<int:programa_id>/', eliminar_programa, name='eliminar_programa'),
 
 
-   
+   path('no-autorizado/', no_autorizado, name='no_autorizado'),
 ]
