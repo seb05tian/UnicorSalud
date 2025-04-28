@@ -4,6 +4,9 @@ import pandas as pd
 from openpyxl import Workbook
 from io import BytesIO
 from ..models import Matricula, AsignaturaDocente
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
 
 @login_required
 def exportar_estudiantes_por_asignatura_docente(request):
@@ -57,3 +60,9 @@ def exportar_estudiantes_por_asignatura_docente(request):
     response = HttpResponse(output, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     response['Content-Disposition'] = 'attachment; filename=estudiantes_por_asignatura.xlsx'
     return response
+
+@login_required
+def pagina_reporte_docente(request):
+    if not request.user.is_authenticated or request.user.rol != 'docente':
+        return HttpResponse("No autorizado", status=403)
+    return render(request, 'core/reporte_docente.html')

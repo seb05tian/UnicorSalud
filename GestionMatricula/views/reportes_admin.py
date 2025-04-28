@@ -1,8 +1,8 @@
 import pandas as pd
 from django.http import HttpResponse
 from ..models import Matricula
-
-
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 def exportar_reporte_excel(request):
     if not request.user.is_authenticated or request.user.rol != 'admin':
@@ -54,3 +54,9 @@ def exportar_reporte_excel(request):
 
     return response
 
+
+@login_required
+def pagina_reporte_admin(request):
+    if not request.user.is_authenticated or request.user.rol != 'admin':
+        return HttpResponse("No autorizado", status=403)
+    return render(request, 'core/reporte_admin.html')

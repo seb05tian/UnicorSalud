@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Gestionar Reporte de Matrículas{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/reportes.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="card">
+        <h1>Reporte de Matrículas</h1>
+        <p class="description">
+            Descarga el reporte completo de las matrículas registradas por los estudiantes.
+        </p>
+
+        <a href="{% url 'listado_docente' %}" class="btn-download">
+            <i class="fas fa-file-excel"></i> Descargar Reporte Excel
+        </a>
+    </div>
+</div>
+{% endblock %}
