@@ -27,7 +27,12 @@ def asignaturas_admin_view(request):
     if request.method == 'POST':
         form = AsignaturaForm(request.POST)
         if form.is_valid():
-            form.save()
+            asignatura = form.save()  
+            prerequisito = form.cleaned_data.get('prerequisito')
+
+            if prerequisito:
+                Prerrequisito.objects.create(asignatura=asignatura, prerequisito=prerequisito)
+
             return redirect('asignaturas_admin')
 
     return render(request, 'core/admin_asignatura.html', {
@@ -38,13 +43,35 @@ def asignaturas_admin_view(request):
 @login_required
 def editar_asignatura(request, pk):
     asignatura = get_object_or_404(Asignatura, pk=pk)
+
+   
+    prerrequisito_obj = Prerrequisito.objects.filter(asignatura=asignatura).first()
+
     if request.method == 'POST':
         form = AsignaturaForm(request.POST, instance=asignatura)
         if form.is_valid():
-            form.save()
+            asignatura = form.save()
+            prerequisito = form.cleaned_data.get('prerequisito')
+
+           
+            if prerrequisito_obj:
+                if prerequisito:
+                    prerrequisito_obj.prerequisito = prerequisito
+                    prerrequisito_obj.save()
+                else:
+                    prerrequisito_obj.delete()
+            else:
+                if prerequisito:
+                    Prerrequisito.objects.create(asignatura=asignatura, prerequisito=prerequisito)
+
             return redirect('asignaturas_admin')
     else:
-        form = AsignaturaForm(instance=asignatura)
+        
+        initial_data = {}
+        if prerrequisito_obj:
+            initial_data['prerequisito'] = prerrequisito_obj.prerequisito
+
+        form = AsignaturaForm(instance=asignatura, initial=initial_data)
 
     asignaturas = Asignatura.objects.all()
     return render(request, 'core/admin_asignatura.html', {

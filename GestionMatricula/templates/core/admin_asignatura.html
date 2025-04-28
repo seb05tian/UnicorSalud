@@ -24,7 +24,17 @@
       <ul>
         {% for asig in asignaturas %}
           <li>
-            <span>{{ asig.codigo }} - {{ asig.nombre }} - Nivel: {{ asig.nivel }}</span>
+            <span>
+              {{ asig.codigo }} - {{ asig.nombre }} - Nivel: {{ asig.nivel }}<br>
+              <strong>Prerrequisito:</strong>
+              {% with prereq=asig.prerrequisito_set.first %}
+                {% if prereq %}
+                  {{ prereq.prerequisito.nombre }}
+                {% else %}
+                  Ninguno
+                {% endif %}
+              {% endwith %}
+            </span>
             <div class="action-buttons">
               <a class="edit" href="{% url 'editar_asignatura_admin' asig.pk %}"><i class="fa-regular fa-pen-to-square"></i></a>
               <a class="delete" href="{% url 'eliminar_asignatura_admin' asig.pk %}"><i class="fa-regular fa-trash-can"></i></a>
