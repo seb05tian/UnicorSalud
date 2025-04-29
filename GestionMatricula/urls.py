@@ -1,6 +1,4 @@
-from django.urls import path, include
-from rest_framework import routers
-
+from django.urls import path
 from .views.matricula import matricular_asignatura,asignaturas_matriculadas
 from .views.asignaturas import  asignaturas_admin_view, ver_asignaturas_disponibles, editar_asignatura, eliminar_asignatura
 from .views.logout import exit
