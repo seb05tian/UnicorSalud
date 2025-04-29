@@ -6,7 +6,7 @@ from ..decorator import role_required
 
 
 @login_required
-@role_required(allowed_roles=['docente'])
+@role_required(allowed_roles=['docente', 'admin'])
 def docente_asignaturas_asignadas(request):
     user = request.user
     is_docente = user.rol == 'docente'
