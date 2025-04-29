@@ -22,8 +22,9 @@ def docente_asignaturas_asignadas(request):
         mostrar_resultados = True
 
     elif is_admin:
-        estudiante_id = request.GET.get('docente_id')
-        if estudiante_id:
+        docente_id = request.GET.get('docente_id') 
+        if docente_id:
+            docente_id = docente_id 
             Asignaciones = AsignaturaDocente.objects.filter(docente__identificacion=docente_id).select_related('asignatura')
             mostrar_resultados = True
 
@@ -35,10 +36,8 @@ def docente_asignaturas_asignadas(request):
         'mostrar_resultados': mostrar_resultados
     })
 
-  
-
 @login_required
-@role_required(allowed_roles=['docente'])
+@role_required(allowed_roles=['docente','admin'])
 def listado_estudiantes(request, asignatura_id):
     asignatura = get_object_or_404(Asignatura, id=asignatura_id)
     estudiantes = Matricula.objects.filter(asignatura_id=asignatura_id).select_related('estudiante')

@@ -16,10 +16,10 @@
 
         {% if is_admin %}
             <label for="docente_id">Identificacion del Docente:</label>
-            <input type="text" name="estudiante_id" placeholder="Ej: 3" value="{{ request.GET.docente_id }}">
+            <input type="text" name="docente_id" placeholder="Ej: 3" value="{{ request.GET.docente_id }}">
         {% elif is_docente %}
             <label for="docente_id">Identificacion:</label>
-            <input type="text" name="estudiante_id" value="{{ user.identificacion }}" readonly disabled>
+            <input type="text" name="docente_id" value="{{ user.identificacion }}" readonly disabled>
         {% else %}
 
 
