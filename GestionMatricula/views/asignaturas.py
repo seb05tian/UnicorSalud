@@ -24,23 +24,25 @@ def ver_asignaturas_disponibles(request):
 @login_required
 @role_required(allowed_roles=['admin'])
 def asignaturas_admin_view(request):
-    asignaturas = Asignatura.objects.all()
-    form = AsignaturaForm()
-
     if request.method == 'POST':
         form = AsignaturaForm(request.POST)
         if form.is_valid():
-            asignatura = form.save()  
-            prerequisito = form.cleaned_data.get('prerequisito')
-
-            if prerequisito:
-                Prerrequisito.objects.create(asignatura=asignatura, prerequisito=prerequisito)
-
+            asignatura = form.save()
+            
+            prerrequisito = form.cleaned_data.get('prerrequisito')
+            if prerrequisito:
+                Prerrequisito.objects.create(
+                    asignatura=asignatura,
+                    prerequisito=prerrequisito
+                )
             return redirect('asignaturas_admin')
+    else:
+        form = AsignaturaForm()
 
+    asignaturas = Asignatura.objects.all()
     return render(request, 'core/admin_asignatura.html', {
-        'asignaturas': asignaturas,
         'form': form,
+        'asignaturas': asignaturas,
     })
 
 @login_required

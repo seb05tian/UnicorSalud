@@ -1,15 +1,14 @@
 from django import forms
-from .models import Asignatura, Prerrequisito
+from .models import Asignatura
 
 class AsignaturaForm(forms.ModelForm):
-    prerequisito = forms.ModelChoiceField(
+    
+    prerrequisito = forms.ModelChoiceField(
         queryset=Asignatura.objects.all(),
         required=False,
-        label='Prerrequisito',
-        
+        label='Prerrequisito'
     )
 
     class Meta:
         model = Asignatura
-        fields = ['codigo', 'nombre', 'nivel', 'programa', 'descripcion']
-
+        fields = ['codigo', 'nombre', 'programa', 'descripcion', 'nivel']

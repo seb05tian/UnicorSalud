@@ -4,44 +4,44 @@
 {% block title %}Gestión Asignaturas{% endblock %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'styles/admin_asignatura.css' %}">
+<link rel="stylesheet" href="{% static 'styles/admin_asignatura.css' %}">
 {% endblock %}
 
 {% block content %}
-  <div class="asignatura-container">
-    <div>
-      <h1>{% if form.instance.pk %}Editar Asignatura{% else %}Crear Asignatura{% endif %}</h1>
-  
-      <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar</button>
-      </form>
-    </div>
+<div class="asignatura-container">
+  <div>
+    <h1>{% if form.instance.pk %}Editar Asignatura{% else %}Crear Asignatura{% endif %}</h1>
 
-    <div>
-      <h2>Lista de Asignaturas</h2>
-      <ul>
-        {% for asig in asignaturas %}
-          <li>
-            <span>
-              {{ asig.codigo }} - {{ asig.nombre }} - Nivel: {{ asig.nivel }}<br>
-              <strong>Prerrequisito:</strong>
-              {% with prereq=asig.prerrequisito_set.first %}
-                {% if prereq %}
-                  {{ prereq.prerequisito.nombre }}
-                {% else %}
-                  Ninguno
-                {% endif %}
-              {% endwith %}
-            </span>
-            <div class="action-buttons">
-              <a class="edit" href="{% url 'editar_asignatura_admin' asig.pk %}"><i class="fa-regular fa-pen-to-square"></i></a>
-              <a class="delete" href="{% url 'eliminar_asignatura_admin' asig.pk %}"><i class="fa-regular fa-trash-can"></i></a>
-            </div>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Guardar</button>
+    </form>
   </div>
+
+  <div>
+    <h2>Lista de Asignaturas</h2>
+    <ul>
+      {% for asig in asignaturas %}
+        <li>
+          <span>
+            {{ asig.codigo }} - {{ asig.nombre }} - Nivel: {{ asig.nivel }}<br>
+            <strong>Prerrequisito:</strong>
+            {% with prereq=asig.asignatura_principal.first %}
+              {% if prereq %}
+                {{ prereq.prerequisito.nombre }}
+              {% else %}
+                Ninguno
+              {% endif %}
+            {% endwith %}
+          </span>
+          <div class="action-buttons">
+            <a class="edit" href="{% url 'editar_asignatura_admin' asig.pk %}"><i class="fa-regular fa-pen-to-square"></i></a>
+            <a class="delete" href="{% url 'eliminar_asignatura_admin' asig.pk %}"><i class="fa-regular fa-trash-can"></i></a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
 {% endblock %}
