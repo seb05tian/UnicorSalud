@@ -46,7 +46,6 @@ form select {
   transition: border-color 0.3s ease;
 }
 
-
 form input[type="text"]:focus,
 input[type="number"]:focus,
 form select:focus,
@@ -80,19 +79,28 @@ ul {
 li {
   padding: 14px 10px;
   border-bottom: 1px solid #e5e5e5;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   font-size: 15px;
 }
 
-li span {
-  flex: 1;
+/* Contenedor flexible entre texto e íconos */
+.info-asig {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+}
+
+.info-asig span {
+  flex: 1 1 auto;
+  min-width: 200px;
 }
 
 .action-buttons {
   display: flex;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .action-buttons a {
@@ -136,7 +144,13 @@ li span {
     gap: 10px;
   }
 
+  .info-asig {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .action-buttons {
     flex-direction: row;
+    justify-content: flex-start;
   }
 }

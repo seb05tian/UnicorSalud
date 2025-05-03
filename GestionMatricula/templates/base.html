@@ -52,7 +52,7 @@
 
                 </a>
                 <a href="{% url 'asignaturas_docente' %}">
-                    <i class="far fa-folder-open"></i>
+                    <i class="fas fa-chalkboard-teacher"></i>
                     <span>Asignaturas Docente</span>
                 </a>
                     <div id="gestion-academica" onclick="toggleSubMenu(this)" style="cursor: pointer;">
@@ -75,7 +75,7 @@
 
                 {% elif user.rol == 'docente' %}
                 <a href="{% url 'asignaturas_docente' %}">
-                    <i class="far fa-folder-open"></i>
+                    <i class="fas fa-chalkboard-teacher"></i>
                     <span>Asignaturas</span>
                 </a>
                     <a href="{% url 'pagina_reporte_docente' %}" >
